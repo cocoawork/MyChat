@@ -23,7 +23,6 @@ public class ClientChatMessageSendHandler extends ChannelInboundHandlerAdapter {
             sendMessage(message);
         }
 
-
     }
 
 

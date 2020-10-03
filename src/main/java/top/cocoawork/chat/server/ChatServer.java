@@ -5,6 +5,7 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.util.concurrent.GenericFutureListener;
 import top.cocoawork.chat.exception.NettyChatException;
 import top.cocoawork.chat.server.handler.ByteToChatMessageDecoder;
 import top.cocoawork.chat.server.handler.ServerChatMessageReadHandler;
@@ -41,10 +42,16 @@ public class ChatServer {
     }
 
 
-    public ChannelFuture run() throws InterruptedException {
-        return serverBootstrap.bind(port).sync()
+    public void run() throws InterruptedException {
+        serverBootstrap.bind(port).sync()
                 .channel().closeFuture().sync();
     }
+
+    public void runWithListener(GenericFutureListener listener) throws InterruptedException {
+        serverBootstrap.bind(port).sync().addListener(listener)
+                .channel().closeFuture().sync();
+    }
+
 
     public void shutdown() {
         serverBootstrap.childGroup().shutdownGracefully();
@@ -52,12 +59,8 @@ public class ChatServer {
     }
 
 
-    public static void main(String[] args) {
-        ChatServer chatServer = new ChatServer(9999);
-        try {
-            chatServer.run();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public static void main(String[] args) throws InterruptedException {
+        new ChatServer(8989).run();
     }
+
 }

@@ -20,7 +20,6 @@ public class ByteToChatMessageDecoder extends ByteToMessageDecoder {
             return;
         }
 
-
         byte[] bytes = new byte[len];
 
         in.readBytes(bytes);

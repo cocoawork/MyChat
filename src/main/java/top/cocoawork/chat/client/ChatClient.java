@@ -5,6 +5,7 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.util.concurrent.GenericFutureListener;
 import top.cocoawork.chat.client.handler.ChatMessageToByteEncoder;
 import top.cocoawork.chat.client.handler.ClientChatMessageSendHandler;
 
@@ -37,19 +38,13 @@ public class ChatClient {
     }
 
 
-    public ChannelFuture run() throws InterruptedException {
-        return bootstrap.connect(host, port)
-                .addListener(new ChannelFutureListener() {
-                    @Override
-                    public void operationComplete(ChannelFuture future) throws Exception {
-                        if (future.isSuccess()) {
-                            System.out.println("success");
-                        }else {
-                            System.out.println("failure");
-                        }
-                    }
-                })
-                .sync()
+    public void run() throws InterruptedException {
+        bootstrap.connect(host,port).sync()
+                .channel().closeFuture().sync();
+    }
+
+    public void runWithListener(GenericFutureListener listener) throws InterruptedException {
+        bootstrap.connect(host,port).addListener(listener).sync()
                 .channel().closeFuture().sync();
     }
 
@@ -58,13 +53,9 @@ public class ChatClient {
         bootstrap.group().shutdownGracefully();
     }
 
-
-    public static void main(String[] args) {
-        ChatClient chatClient = new ChatClient("127.0.0.1", 9999);
-        try {
-            chatClient.run();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public static void main(String[] args) throws InterruptedException {
+        new ChatClient("127.0.0.1", 8989).run();
     }
+
+
 }
