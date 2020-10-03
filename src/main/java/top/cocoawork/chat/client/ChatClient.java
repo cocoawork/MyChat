@@ -5,7 +5,7 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import top.cocoawork.chat.client.handler.ChatMessage2ByteEncoder;
+import top.cocoawork.chat.client.handler.ChatMessageToByteEncoder;
 import top.cocoawork.chat.client.handler.ClientChatMessageSendHandler;
 
 public class ChatClient {
@@ -30,7 +30,7 @@ public class ChatClient {
                     @Override
                     protected void initChannel(SocketChannel ch) throws Exception {
                         ChannelPipeline pipeline = ch.pipeline();
-                        pipeline.addLast(new ChatMessage2ByteEncoder());
+                        pipeline.addLast(new ChatMessageToByteEncoder());
                         pipeline.addLast(new ClientChatMessageSendHandler());
                     }
                 });

@@ -10,19 +10,9 @@ public class ChatTextMessage extends ChatMessage {
         return message;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public ChatTextMessage(String from, LocalDateTime time, String message) {
-        super(from, time);
-        this.message = message;
-    }
-
     public ChatTextMessage(String message) {
+        super();
         this.message = message;
     }
 
-    public ChatTextMessage() {
-    }
 }

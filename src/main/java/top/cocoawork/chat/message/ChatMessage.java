@@ -4,44 +4,50 @@ import com.alibaba.fastjson.JSON;
 
 import java.time.LocalDateTime;
 
-public abstract class ChatMessage implements JsonSerializable {
+public abstract class ChatMessage extends TransferPackage {
 
-    private String clazz = this.getClass().getName();
-    private String from;
-    private LocalDateTime time;
+    private String fromIp;
+    private String toIp;
+    private String fromUid;
+    private String toUid;
 
-    public String getClazz() {
-        return clazz;
+    public String getFromIp() {
+        return fromIp;
     }
 
-    public String getFrom() {
-        return from;
+    public void setFromIp(String fromIp) {
+        this.fromIp = fromIp;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public String getToIp() {
+        return toIp;
     }
 
-    public LocalDateTime getTime() {
-        return time;
+    public void setToIp(String toIp) {
+        this.toIp = toIp;
     }
 
-    public void setTime(LocalDateTime time) {
-        this.time = time;
+    public String getFromUid() {
+        return fromUid;
     }
 
-    public ChatMessage(String from, LocalDateTime time) {
-        this.from = from;
-        this.time = time;
+    public void setFromUid(String fromUid) {
+        this.fromUid = fromUid;
+    }
+
+    public String getToUid() {
+        return toUid;
+    }
+
+    public void setToUid(String toUid) {
+        this.toUid = toUid;
     }
 
     public ChatMessage() {
-        time = LocalDateTime.now();
+        this.setVer(1);
+        this.setTime(System.currentTimeMillis());
+        this.setType(TransferPackage.PACKAGE_TYPE_DATA);
     }
 
-    @Override
-    public String toJsonString() {
-        return JSON.toJSONString(this);
-    }
 
 }
