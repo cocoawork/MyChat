@@ -6,9 +6,10 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.util.concurrent.GenericFutureListener;
+import top.cocoawork.chat.codec.MyMessageToByteEncoder;
 import top.cocoawork.chat.exception.NettyChatException;
-import top.cocoawork.chat.server.handler.ByteToChatMessageDecoder;
-import top.cocoawork.chat.server.handler.ServerChatMessageReadHandler;
+import top.cocoawork.chat.codec.MyByteToMessageDecoder;
+import top.cocoawork.chat.server.handler.MyServerMessageHandler;
 
 public class ChatServer {
 
@@ -34,8 +35,13 @@ public class ChatServer {
                     @Override
                     protected void initChannel(SocketChannel socketChannel) throws Exception {
                         ChannelPipeline pipeline = socketChannel.pipeline();
-                        pipeline.addLast(new ByteToChatMessageDecoder());
-                        pipeline.addLast(new ServerChatMessageReadHandler());
+                        //处理入站消息的处理器
+                        pipeline.addLast(new MyByteToMessageDecoder());
+                        //处理出站消息的处理器
+                        pipeline.addLast(new MyMessageToByteEncoder());
+                        //业务处理器
+                        pipeline.addLast(new MyServerMessageHandler());
+
                     }
                 });
 
@@ -61,6 +67,7 @@ public class ChatServer {
 
     public static void main(String[] args) throws InterruptedException {
         new ChatServer(8989).run();
+
     }
 
 }

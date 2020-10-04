@@ -6,8 +6,9 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.concurrent.GenericFutureListener;
-import top.cocoawork.chat.client.handler.ChatMessageToByteEncoder;
-import top.cocoawork.chat.client.handler.ClientChatMessageSendHandler;
+import top.cocoawork.chat.codec.MyByteToMessageDecoder;
+import top.cocoawork.chat.codec.MyMessageToByteEncoder;
+import top.cocoawork.chat.client.handler.MyClientMessageHandler;
 
 public class ChatClient {
 
@@ -27,12 +28,19 @@ public class ChatClient {
         return new Bootstrap()
                 .group(group)
                 .channel(NioSocketChannel.class)
+                .option(ChannelOption.SO_KEEPALIVE,true)
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel ch) throws Exception {
                         ChannelPipeline pipeline = ch.pipeline();
-                        pipeline.addLast(new ChatMessageToByteEncoder());
-                        pipeline.addLast(new ClientChatMessageSendHandler());
+
+                        //处理出站消息的处理器
+                        pipeline.addLast(new MyMessageToByteEncoder());
+                        //处理入站消息的处理器
+                        pipeline.addLast(new MyByteToMessageDecoder());
+                        //业务处理器
+                        pipeline.addLast(new MyClientMessageHandler());
+
                     }
                 });
     }

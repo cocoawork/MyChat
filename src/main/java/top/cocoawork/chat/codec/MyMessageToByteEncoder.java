@@ -1,11 +1,11 @@
-package top.cocoawork.chat.client.handler;
+package top.cocoawork.chat.codec;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
 import top.cocoawork.chat.message.TransferPackageWrap;
 
-public class ChatMessageToByteEncoder extends MessageToByteEncoder<TransferPackageWrap> {
+public class MyMessageToByteEncoder extends MessageToByteEncoder<TransferPackageWrap> {
 
     @Override
     protected void encode(ChannelHandlerContext ctx, TransferPackageWrap msg, ByteBuf out) throws Exception {

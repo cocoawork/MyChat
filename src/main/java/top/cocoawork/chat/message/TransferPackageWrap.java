@@ -1,8 +1,6 @@
 package top.cocoawork.chat.message;
 
 
-import top.cocoawork.chat.message.TransferPackage;
-
 public class TransferPackageWrap<E extends TransferPackage> {
 
     private E data;

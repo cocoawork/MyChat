@@ -1,8 +1,6 @@
 package top.cocoawork.chat.message;
 
-import java.time.LocalDateTime;
-
-public class ChatTextMessage extends ChatMessage {
+public class ChatSystemMessage extends ChatMessage {
 
     private String message;
 
@@ -10,8 +8,8 @@ public class ChatTextMessage extends ChatMessage {
         return message;
     }
 
-    public ChatTextMessage(String message) {
-        super((byte) 0x01);
+    public ChatSystemMessage(String message) {
+        super((byte) 0x00);
         this.message = message;
 
     }

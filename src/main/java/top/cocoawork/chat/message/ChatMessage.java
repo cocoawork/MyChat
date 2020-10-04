@@ -11,6 +11,22 @@ public abstract class ChatMessage extends TransferPackage {
     private String fromUid;
     private String toUid;
 
+    /**
+     * 消息类型
+     * 系统消息： 0x00
+     * 文本消息： 0x01
+     */
+    private byte msgType;
+
+
+    public byte getMsgType() {
+        return msgType;
+    }
+
+    public void setMsgType(byte msgType) {
+        this.msgType = msgType;
+    }
+
     public String getFromIp() {
         return fromIp;
     }
@@ -43,7 +59,8 @@ public abstract class ChatMessage extends TransferPackage {
         this.toUid = toUid;
     }
 
-    public ChatMessage() {
+    public ChatMessage(byte msgType) {
+        this.msgType = msgType;
         this.setVer(1);
         this.setTime(System.currentTimeMillis());
         this.setType(TransferPackage.PACKAGE_TYPE_DATA);
