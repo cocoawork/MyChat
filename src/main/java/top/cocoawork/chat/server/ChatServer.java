@@ -5,6 +5,7 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.util.ReferenceCountUtil;
 import io.netty.util.concurrent.GenericFutureListener;
 import top.cocoawork.chat.codec.MyMessageToByteEncoder;
 import top.cocoawork.chat.exception.NettyChatException;

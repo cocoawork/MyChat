@@ -18,6 +18,7 @@ public class MyByteToMessageDecoder extends ByteToMessageDecoder {
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
 
         if (in == null) return;
+
         if (in.readableBytes() <= 4) return;;
         in.markReaderIndex();
         int len = in.readInt();
@@ -72,6 +73,8 @@ public class MyByteToMessageDecoder extends ByteToMessageDecoder {
         aPackage.setType(type);
         aPackage.setVer(version);
         out.add(aPackage);
+
+        System.out.println("in引用计数=" + in.refCnt());
 
 
     }

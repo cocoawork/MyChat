@@ -3,6 +3,7 @@ package top.cocoawork.chat.codec;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
+import io.netty.util.ReferenceCountUtil;
 import top.cocoawork.chat.message.TransferPackageWrap;
 
 public class MyMessageToByteEncoder extends MessageToByteEncoder<TransferPackageWrap> {
@@ -14,6 +15,8 @@ public class MyMessageToByteEncoder extends MessageToByteEncoder<TransferPackage
         out.writeInt(msg.getLength());
         //发送数据包
         out.writeBytes(msg.getBytes());
+        
+
     }
 
 
