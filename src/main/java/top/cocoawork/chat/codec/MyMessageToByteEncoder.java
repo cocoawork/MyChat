@@ -15,7 +15,7 @@ public class MyMessageToByteEncoder extends MessageToByteEncoder<TransferPackage
         out.writeInt(msg.getLength());
         //发送数据包
         out.writeBytes(msg.getBytes());
-        
+
 
     }
 
