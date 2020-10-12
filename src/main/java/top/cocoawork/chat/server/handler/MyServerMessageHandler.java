@@ -6,7 +6,11 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
+import io.netty.handler.timeout.IdleState;
+import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.util.concurrent.DefaultEventExecutor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import top.cocoawork.chat.message.ChatSystemMessage;
 import top.cocoawork.chat.message.ChatTextMessage;
 import top.cocoawork.chat.message.TransferPackage;
@@ -15,6 +19,8 @@ import top.cocoawork.chat.message.TransferPackageWrap;
 import java.net.SocketAddress;
 
 public class MyServerMessageHandler extends SimpleChannelInboundHandler<TransferPackage> {
+
+    private final Logger logger = LoggerFactory.getLogger(MyServerMessageHandler.class);
 
     private static ChannelGroup channels;
 
@@ -43,4 +49,13 @@ public class MyServerMessageHandler extends SimpleChannelInboundHandler<Transfer
         channels.add(ctx.channel());
     }
 
+
+    @Override
+    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+        if (evt instanceof IdleStateEvent) {
+            IdleStateEvent event = (IdleStateEvent) evt;
+            logger.debug(event.toString());
+        }
+
+    }
 }

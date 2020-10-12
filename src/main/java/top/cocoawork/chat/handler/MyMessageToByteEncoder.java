@@ -1,9 +1,8 @@
-package top.cocoawork.chat.codec;
+package top.cocoawork.chat.handler;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
-import io.netty.util.ReferenceCountUtil;
 import top.cocoawork.chat.message.TransferPackageWrap;
 
 public class MyMessageToByteEncoder extends MessageToByteEncoder<TransferPackageWrap> {

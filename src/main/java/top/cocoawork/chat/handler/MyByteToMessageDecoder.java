@@ -1,4 +1,4 @@
-package top.cocoawork.chat.codec;
+package top.cocoawork.chat.handler;
 
 import com.alibaba.fastjson.JSONObject;
 import io.netty.buffer.ByteBuf;
@@ -8,7 +8,6 @@ import io.netty.util.CharsetUtil;
 import top.cocoawork.chat.message.ChatSystemMessage;
 import top.cocoawork.chat.message.ChatTextMessage;
 import top.cocoawork.chat.message.TransferPackage;
-import top.cocoawork.chat.message.TransferPackageWrap;
 
 import java.util.List;
 

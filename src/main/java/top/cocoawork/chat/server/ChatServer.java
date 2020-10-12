@@ -7,15 +7,14 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
-import io.netty.util.ReferenceCountUtil;
-import io.netty.util.concurrent.CompleteFuture;
+import io.netty.handler.timeout.IdleStateHandler;
 import io.netty.util.concurrent.GenericFutureListener;
-import top.cocoawork.chat.codec.MyMessageToByteEncoder;
+import top.cocoawork.chat.handler.MyMessageToByteEncoder;
 import top.cocoawork.chat.exception.NettyChatException;
-import top.cocoawork.chat.codec.MyByteToMessageDecoder;
+import top.cocoawork.chat.handler.MyByteToMessageDecoder;
 import top.cocoawork.chat.server.handler.MyServerMessageHandler;
 
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 public class ChatServer {
 
@@ -45,6 +44,10 @@ public class ChatServer {
                         //添加日志handler
                         LoggingHandler loggingHandler = new LoggingHandler(LogLevel.DEBUG);
                         pipeline.addLast(loggingHandler);
+
+                        //添加心跳检测
+                        pipeline.addLast(new IdleStateHandler(2,2,3,TimeUnit.SECONDS));
+
                         //处理入站消息的处理器
                         pipeline.addLast(new MyByteToMessageDecoder());
                         //处理出站消息的处理器

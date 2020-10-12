@@ -7,10 +7,13 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import io.netty.handler.timeout.IdleStateHandler;
 import io.netty.util.concurrent.GenericFutureListener;
-import top.cocoawork.chat.codec.MyByteToMessageDecoder;
-import top.cocoawork.chat.codec.MyMessageToByteEncoder;
+import top.cocoawork.chat.handler.MyByteToMessageDecoder;
+import top.cocoawork.chat.handler.MyMessageToByteEncoder;
 import top.cocoawork.chat.client.handler.MyClientMessageHandler;
+
+import java.util.concurrent.TimeUnit;
 
 public class ChatClient {
 
