@@ -5,6 +5,8 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
 import io.netty.util.concurrent.GenericFutureListener;
 import top.cocoawork.chat.codec.MyByteToMessageDecoder;
 import top.cocoawork.chat.codec.MyMessageToByteEncoder;
@@ -33,6 +35,10 @@ public class ChatClient {
                     @Override
                     protected void initChannel(SocketChannel ch) throws Exception {
                         ChannelPipeline pipeline = ch.pipeline();
+
+                        //添加日志handler
+                        LoggingHandler loggingHandler = new LoggingHandler(LogLevel.DEBUG);
+                        pipeline.addLast(loggingHandler);
 
                         //处理出站消息的处理器
                         pipeline.addLast(new MyMessageToByteEncoder());

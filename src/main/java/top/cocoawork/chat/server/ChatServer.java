@@ -5,6 +5,8 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
 import io.netty.util.ReferenceCountUtil;
 import io.netty.util.concurrent.CompleteFuture;
 import io.netty.util.concurrent.GenericFutureListener;
@@ -39,6 +41,10 @@ public class ChatServer {
                     @Override
                     protected void initChannel(SocketChannel socketChannel) throws Exception {
                         ChannelPipeline pipeline = socketChannel.pipeline();
+
+                        //添加日志handler
+                        LoggingHandler loggingHandler = new LoggingHandler(LogLevel.DEBUG);
+                        pipeline.addLast(loggingHandler);
                         //处理入站消息的处理器
                         pipeline.addLast(new MyByteToMessageDecoder());
                         //处理出站消息的处理器

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+
+    <!-- 定义属性，定义后，可以通过${}取出值 -->
+    <!-- 这里定义的是日志文存储的物理路径，${catalina.base}是tomcat文件夹的根路径，如D:\apache-tomcat-7.0.90  -->
+    <property name="LOG_HOME" value="/Users/cocoawork/Desktop/java/---logs---"/>
+    <property name="PROJECT_NAME" value="ChatProject"/>
+
+
+    <!-- name为定义的appender的名称，可以随便取， ch.qos.logback.core.ConsoleAppender 是指控制台输出 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--日志输出格式：
+                %d表示日期时间，
+                %thread表示线程名，
+                %‐5level：级别从左显示5个字符宽度
+                %file：打印该条日志所在的java类
+                %line：打印该条日志所在的java类的行号
+                %logger{50} 表示logger名字最长50个字符，否则按照句点分割。
+                %msg：日志消息，
+                %n是换行符
+            -->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%file:%line] %logger{50} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 按照每天生成日志文件 -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/${PROJECT_NAME}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名，若文件名以.gz或.zip结尾则自动压缩-->
+            <FileNamePattern>${LOG_HOME}/${PROJECT_NAME}.log.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <!--日志文件保留天数-->
+            <MaxHistory>365</MaxHistory>
+            <!--日志文件最大的大小-->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>50MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%file:%line] %logger{50} - %msg%n</pattern>
+            <charset class="java.nio.charset.Charset">UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- 日志输出级别 -->
+    <!-- TRACE,DEBUG,INFO,WARN,ERROR,ALL,OFF -->
+    <!-- 默认的全局输出级别配置 -->
+    <root level="DEBUG">
+        <!-- 使用哪些appender的配置进行输出 -->
+        <appender-ref ref="STDOUT"/>
+<!--        <appender-ref ref="FILE"/>-->
+    </root>
+
+    <!-- cn.fg.api包下的日志，使用error级别进行输出， addtivity="false"后，root就不会再输出，不然就会打印两次，因为logger是继承root的 -->
+    <logger name="cn.fg.api" level="ERROR" addtivity="false">
+        <appender-ref ref="FILE"></appender-ref>
+    </logger>
+
+</configuration>

@@ -74,8 +74,6 @@ public class MyByteToMessageDecoder extends ByteToMessageDecoder {
         aPackage.setVer(version);
         out.add(aPackage);
 
-        System.out.println("in引用计数=" + in.refCnt());
-
 
     }
 
