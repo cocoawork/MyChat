@@ -20,6 +20,8 @@ import java.net.SocketAddress;
 
 public class MyServerMessageHandler extends SimpleChannelInboundHandler<TransferPackage> {
 
+    private int all_idle_times;
+
     private final Logger logger = LoggerFactory.getLogger(MyServerMessageHandler.class);
 
     private static ChannelGroup channels;
@@ -54,7 +56,14 @@ public class MyServerMessageHandler extends SimpleChannelInboundHandler<Transfer
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
         if (evt instanceof IdleStateEvent) {
             IdleStateEvent event = (IdleStateEvent) evt;
-            logger.debug(event.toString());
+            if (event.state() == IdleState.ALL_IDLE) {
+                all_idle_times++;
+            }
+
+//            //接收到超过三次，断开连接
+//            if (all_idle_times >= 3) {
+//                ctx.channel().close();
+//            }
         }
 
     }

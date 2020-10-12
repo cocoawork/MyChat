@@ -1,6 +1,8 @@
 package top.cocoawork.chat.client.handler;
 
 import io.netty.channel.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import top.cocoawork.chat.message.*;
 
 import java.time.Instant;
@@ -10,6 +12,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class MyClientMessageHandler extends SimpleChannelInboundHandler<TransferPackage> {
+
+    private final Logger logger = LoggerFactory.getLogger(MyClientMessageHandler.class);
 
     private Channel channel;
 
