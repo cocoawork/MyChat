@@ -4,9 +4,9 @@ import java.time.LocalDateTime;
 
 public abstract class TransferPackage implements JsonSerializable {
 
-    public static final byte PACKAGE_TYPE_DATA = 0x00;       //正常业务数据包
-    public static final byte PACKAGE_TYPE_TIMEOUT = 0x01;    //超时数据包
-    public static final byte PACKAGE_TYPE_MIND = 0x10;       //心跳包
+    public static final byte PACKAGE_TYPE_DATA = 0b00;       //正常业务数据包
+    public static final byte PACKAGE_TYPE_TIMEOUT = 0b01;    //超时数据包
+    public static final byte PACKAGE_TYPE_MIND = 0b10;       //心跳包
 
     private byte type;
 

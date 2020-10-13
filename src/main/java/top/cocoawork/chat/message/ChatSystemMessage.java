@@ -9,7 +9,7 @@ public class ChatSystemMessage extends ChatMessage {
     }
 
     public ChatSystemMessage(String message) {
-        super((byte) 0x00);
+        super((byte) 0b00);
         this.message = message;
 
     }

@@ -11,7 +11,7 @@ public class ChatTextMessage extends ChatMessage {
     }
 
     public ChatTextMessage(String message) {
-        super((byte) 0x01);
+        super((byte) 0b01);
         this.message = message;
 
     }
