@@ -5,54 +5,60 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>top.cocoawork.chat</groupId>
-    <artifactId>SimpleChatServer</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>8</source>
-                    <target>8</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+    <artifactId>MyChat</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0</version>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-parent</artifactId>
+        <version>2.3.0.RELEASE</version>
+    </parent>
 
 
-    <dependencies>
-       <dependency>
-           <groupId>io.netty</groupId>
-           <artifactId>netty-all</artifactId>
-           <version>4.1.50.Final</version>
-       </dependency>
+    <modules>
+        <module>chat-common</module>
+        <module>chat-service-api</module>
+        <module>chat-service</module>
+        <module>chat-api</module>
+        <module>chat-server-app</module>
+        <module>chat-client-app</module>
+        <module>chat-dao</module>
+    </modules>
 
-       <dependency>
-           <groupId>com.alibaba</groupId>
-           <artifactId>fastjson</artifactId>
-           <version>1.2.73</version>
-       </dependency>
+    <properties>
+
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <chat-common-version>1.0</chat-common-version>
+        <chat-service-version>1.0</chat-service-version>
+        <chat-service-api-version>1.0</chat-service-api-version>
+        <chat-api-version>1.0</chat-api-version>
+        <chat-server-app-version>1.0</chat-server-app-version>
+        <chat-client-app-version>1.0</chat-client-app-version>
+        <chat-dao-version>1.0</chat-dao-version>
+
+        <mybatis-plus-version>3.4.0</mybatis-plus-version>
+        <netty-version>4.1.52.Final</netty-version>
+        <hutool-version>5.4.4</hutool-version>
+        <mysql-version>8.0.20</mysql-version>
+        <fast-json-version>1.2.74</fast-json-version>
+        <dozer-version>6.5.0</dozer-version>
 
 
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>2.0.0-alpha1</version>
-        </dependency>
+    </properties>
 
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.3.0-alpha5</version>
-        </dependency>
 
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-core</artifactId>
-            <version>1.3.0-alpha5</version>
-        </dependency>
 
-   </dependencies>
+
+
+    <dependencyManagement>
+
+
+
+
+    </dependencyManagement>
+
 
 </project>

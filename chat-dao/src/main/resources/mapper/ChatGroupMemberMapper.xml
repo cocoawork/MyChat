@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.cocoawork.chat.dao.mapper.ChatGroupMemberMapper">
+
+
+    <update id="update" parameterType="top.cocoawork.chat.dao.entity.ChatGroupMember">
+        update t_group_member set update_at = now(),
+        <if test="#{member.userNick} != null">
+             user_nick = #{member.userNick}
+        </if>
+        where gid = #{member.gid} and uid = #{member.uid} and del = 0
+    </update>
+
+    <select id="getMembersById" resultType="top.cocoawork.chat.dao.entity.ChatGroupMember">
+        select m.uid, m.user_nick, u.*
+        from t_group_member m left join t_user u
+        on m.uid = u.id
+        where m.gid = #{groupId} and m.del = 0 order by m.create_at asc
+    </select>
+
+    <update id="delete">
+        update t_group_member set del = 1
+        where gid = #{gid} and uid = #{uid}
+    </update>
+
+
+</mapper>

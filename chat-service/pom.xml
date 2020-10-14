@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>MyChat</artifactId>
+        <groupId>top.cocoawork.chat</groupId>
+        <version>1.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>chat-service</artifactId>
+    <version>${chat-service-version}</version>
+
+    <dependencies>
+
+
+        <dependency>
+            <groupId>top.cocoawork.chat</groupId>
+            <artifactId>chat-service-api</artifactId>
+            <version>${chat-service-api-version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>top.cocoawork.chat</groupId>
+            <artifactId>chat-dao</artifactId>
+            <version>${chat-dao-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>top.cocoawork.chat</groupId>
+            <artifactId>chat-common</artifactId>
+            <version>${chat-common-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+</project>
