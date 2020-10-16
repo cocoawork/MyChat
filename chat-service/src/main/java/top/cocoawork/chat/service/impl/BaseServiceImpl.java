@@ -11,8 +11,8 @@ import java.lang.reflect.Type;
  */
 abstract public class BaseServiceImpl<D, DTO> {
 
-    private Class<D> dClass = getClass(0);
-    private Class<DTO> dtoClass = getClass(1);
+    private final Class<D> dClass = getClass(0);
+    private final Class<DTO> dtoClass = getClass(1);
 
 
     public void d2dto(D d, DTO dto) {
@@ -48,7 +48,7 @@ abstract public class BaseServiceImpl<D, DTO> {
     }
 
 
-    private Class getClass(int index) {
+    private final Class getClass(int index) {
         Type superclass = getClass().getGenericSuperclass();
         ParameterizedType parameterizedType = null;
         if (superclass instanceof ParameterizedType) {

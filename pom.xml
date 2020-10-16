@@ -45,18 +45,13 @@
         <mysql-version>8.0.20</mysql-version>
         <fast-json-version>1.2.74</fast-json-version>
         <dozer-version>6.5.0</dozer-version>
+        <dubbo-starter-version>2.0.0</dubbo-starter-version>
 
 
     </properties>
 
 
-
-
-
     <dependencyManagement>
-
-
-
 
     </dependencyManagement>
 
