@@ -9,9 +9,9 @@ public class ChatGroup extends AutoId {
 
   private String name;
   private String desc;
-  private Long owner;
-  private Integer state;
-  private Integer type;
+  private long owner;
+  private int state;
+  private int type;
 
 
 }

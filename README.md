@@ -1,5 +1,5 @@
- # MyChat
-基于Netty实现的聊天服务器
+# MyChat
+> 基于Netty实现的聊天服务器
  
 ### 使用到/将会使用到
 * SSM
