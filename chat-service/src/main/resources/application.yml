@@ -10,6 +10,8 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     username: root
     password: 12345678
+    hikari:
+      maximum-pool-size: 200
 
 
 #mybatis-plus配置
