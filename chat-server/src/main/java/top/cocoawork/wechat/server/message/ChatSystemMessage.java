@@ -1,16 +1,11 @@
 package top.cocoawork.wechat.server.message;
 
-public class ChatSystemMessage extends ChatMessage {
+public class ChatSystemMessage extends ChatMessage<Byte> {
 
-    private String message;
+    transient public static final byte MESSAGE_SYS = 1;
 
-    public String getMessage() {
-        return message;
-    }
-
-    public ChatSystemMessage(String message) {
-        super((byte) 0b00);
-        this.message = message;
+    public ChatSystemMessage(Long fromUid, Long toUid, Byte content) {
+        super(fromUid, toUid, MESSAGE_SYS, content);
     }
 
 }
