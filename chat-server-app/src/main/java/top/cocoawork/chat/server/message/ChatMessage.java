@@ -1,49 +1,21 @@
 package top.cocoawork.chat.server.message;
 
-import top.cocoawork.chat.server.protocol.DataPackage;
+import lombok.Getter;
+import lombok.Setter;
 
-public abstract class ChatMessage extends DataPackage {
+@Getter
+@Setter
+public abstract class ChatMessage<E> {
 
-    private String fromUid;
-    private String toUid;
-
-    /**
-     * 消息类型
-     * 系统消息： 0b00
-     * 文本消息： 0b01
-     */
+    private Long fromUid;
+    private Long toUid;
     private byte msgType;
+    private E content;
 
-    public byte getMsgType() {
-        return msgType;
-    }
-
-    public void setMsgType(byte msgType) {
-        this.msgType = msgType;
-    }
-
-    public String getFromUid() {
-        return fromUid;
-    }
-
-    public void setFromUid(String fromUid) {
+    public ChatMessage(Long fromUid, Long toUid, byte msgType, E content) {
         this.fromUid = fromUid;
-    }
-
-    public String getToUid() {
-        return toUid;
-    }
-
-    public void setToUid(String toUid) {
         this.toUid = toUid;
-    }
-
-    public ChatMessage(byte msgType) {
         this.msgType = msgType;
-        this.setVer(1);
-        this.setTime(System.currentTimeMillis());
-        this.setType(DataPackage.PACKAGE_TYPE_DATA);
+        this.content = content;
     }
-
-
 }

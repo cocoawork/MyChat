@@ -10,12 +10,11 @@ import io.netty.util.concurrent.DefaultEventExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import top.cocoawork.chat.server.message.ChatSystemMessage;
-import top.cocoawork.chat.server.protocol.DataPackage;
-import top.cocoawork.chat.server.protocol.DataPackageWrap;
+import top.cocoawork.chat.server.protocol.Packet;
 
 import java.net.SocketAddress;
 
-public class MyServerMessageHandler extends SimpleChannelInboundHandler<DataPackage> {
+public class MyServerMessageHandler extends SimpleChannelInboundHandler<Packet> {
 
     private int all_idle_times;
 
@@ -24,10 +23,10 @@ public class MyServerMessageHandler extends SimpleChannelInboundHandler<DataPack
     private static ChannelGroup channels;
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, DataPackage msg) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, Packet msg) throws Exception {
 
-        DataPackageWrap<DataPackage> packageWrap = new DataPackageWrap(msg);
-        channels.writeAndFlush(packageWrap);
+//        PacketWrap<Packet> packageWrap = new PacketWrap(msg);
+        channels.writeAndFlush(msg);
 
     }
 
@@ -41,11 +40,11 @@ public class MyServerMessageHandler extends SimpleChannelInboundHandler<DataPack
         //提示群组中所有客户端 有新的成员上线了
         String tip =  "[" + clientAddress + "]上线了";
         System.out.println(tip);
-        ChatSystemMessage message = new ChatSystemMessage(tip);
-        DataPackageWrap<ChatSystemMessage> packageWrap = new DataPackageWrap<>(message);
 
-        channels.writeAndFlush(packageWrap);
-        channels.add(ctx.channel());
+//        ChatSystemMessage message = new ChatSystemMessage();
+//
+//        channels.writeAndFlush(packageWrap);
+//        channels.add(ctx.channel());
     }
 
 

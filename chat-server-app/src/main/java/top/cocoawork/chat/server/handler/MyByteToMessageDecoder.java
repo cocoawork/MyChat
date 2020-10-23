@@ -5,9 +5,10 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
 import io.netty.util.CharsetUtil;
+import top.cocoawork.chat.server.message.ChatMessage;
 import top.cocoawork.chat.server.message.ChatSystemMessage;
 import top.cocoawork.chat.server.message.ChatTextMessage;
-import top.cocoawork.chat.server.protocol.DataPackage;
+import top.cocoawork.chat.server.protocol.Packet;
 
 import java.util.List;
 
@@ -40,20 +41,19 @@ public class MyByteToMessageDecoder extends ByteToMessageDecoder {
         Byte type = jsonObject.getByte("type");
         Integer version = jsonObject.getInteger("ver");
 
-        DataPackage aPackage = null;
+        ChatMessage aPackage = null;
 
-        if (type == DataPackage.PACKAGE_TYPE_DATA) {
+        if (type == Packet.PACKET_TYPE_DATA) {
             //数据包
             Byte msgType = jsonObject.getByte("msgType");
             String fromIp = jsonObject.getString("fromIp");
-            if (msgType == 0x01) {
+            if (msgType == 0b01) {
                 //文本消息
                 ChatTextMessage message = jsonObject.toJavaObject(ChatTextMessage.class);
-                message.setFromIp(fromIp);
 
                 aPackage = message;
             }
-            if (msgType == 0x00) {
+            if (msgType == 0b00) {
                 //文本消息
                 ChatSystemMessage message = jsonObject.toJavaObject(ChatSystemMessage.class);
                 aPackage = message;
@@ -61,9 +61,9 @@ public class MyByteToMessageDecoder extends ByteToMessageDecoder {
         }
 
         assert aPackage != null;
-        aPackage.setTime(time);
-        aPackage.setType(type);
-        aPackage.setVer(version);
+//        aPackage.setTimestamp(time);
+//        aPackage.setType(type);
+//        aPackage.setVersion(version+"");
         out.add(aPackage);
 
     }
