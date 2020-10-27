@@ -1,10 +1,9 @@
-package top.cocoawork.chat.server.handler;
+package top.cocoaork.chat.client.handler;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
-import top.cocoawork.chat.server.protocol.DefaultLengthTransferPacket;
-import top.cocoawork.chat.server.protocol.LengthTransfer;
+import top.cocoaork.chat.client.protocol.LengthTransfer;
 
 public class MyMessageToByteEncoder extends MessageToByteEncoder<LengthTransfer> {
 

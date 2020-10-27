@@ -8,7 +8,7 @@ import top.cocoawork.chat.server.interfaces.JsonSerializable;
 import java.nio.charset.StandardCharsets;
 
 @Getter
-public class Packet<T> implements JsonSerializable {
+public class DefaultLengthTransferPacket<T> implements LengthTransfer {
 
     transient public static final byte PACKET_TYPE_DATA = 1;   //数据包
     transient public static final byte PACKET_TYPE_MIND = 2;   //心跳包
@@ -24,34 +24,28 @@ public class Packet<T> implements JsonSerializable {
     //协议版本号
     private String version = PROTOCOL_VERSION;
 
-    //数据长度
-    @JSONField(serialize = false, deserialize = false)
-    private transient Integer length;
-
-    //数据包字节数组
-    @JSONField(serialize = false, deserialize = false)
-    private transient byte[] bytes;
-
     //数据内容
     private T data;
 
-    private Packet() {
+    private DefaultLengthTransferPacket() {
         throw new AssertionError("sorry, you can not call this private constructor!");
     }
 
-    public Packet(byte type) {
+    public DefaultLengthTransferPacket(byte type) {
         this.type = type;
     }
 
-    public Packet(byte type, T data) {
+    public DefaultLengthTransferPacket(byte type, T data) {
         this.type = type;
         this.data = data;
     }
 
+    @JSONField(serialize = false, deserialize = false)
     public Integer getLength() {
         return this.getBytes().length;
     }
 
+    @JSONField(serialize = false, deserialize = false)
     public byte[] getBytes(){
         return this.toJsonString().getBytes(StandardCharsets.UTF_8);
     }

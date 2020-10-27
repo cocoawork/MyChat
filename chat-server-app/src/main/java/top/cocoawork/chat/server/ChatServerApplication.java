@@ -7,8 +7,8 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import top.cocoawork.chat.server.bootstrap.ChatServer;
 import top.cocoawork.chat.server.message.ChatMessage;
-import top.cocoawork.chat.server.message.ChatTextMessage;
-import top.cocoawork.chat.server.protocol.Packet;
+import top.cocoawork.chat.server.message.ChatMessageText;
+import top.cocoawork.chat.server.protocol.DefaultLengthTransferPacket;
 
 @SpringBootApplication
 public class ChatServerApplication implements ApplicationListener<ApplicationReadyEvent> {
@@ -17,12 +17,18 @@ public class ChatServerApplication implements ApplicationListener<ApplicationRea
     private Integer port;
 
     public static void main(String[] args) {
-
-        ChatMessage message = new ChatTextMessage(1L, 2L, "特色唐卡的");
-        Packet packet = new Packet(Packet.PACKET_TYPE_DATA, message);
-
-        String s = packet.toJsonString();
-        System.out.println(s);
+//
+//        ChatMessage message = new ChatMessageText();
+//        message.setContent("asashdksadjkasjdkas".getBytes());
+//        message.setRecType(0);
+//        message.setFromUid(1L);
+//
+//        DefaultLengthTransferPacket packet = new DefaultLengthTransferPacket(DefaultLengthTransferPacket.PACKET_TYPE_DATA, message);
+//
+//        String s = packet.toJsonString();
+//        Integer length = packet.getLength();
+//        System.out.println(length);
+//        System.out.println(s);
 
         SpringApplication.run(ChatServerApplication.class,args);
     }

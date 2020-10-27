@@ -1,4 +1,4 @@
-package top.cocoawork.chat.server.handler;
+package top.cocoaork.chat.client.handler;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -9,9 +9,10 @@ import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.util.concurrent.DefaultEventExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import top.cocoawork.chat.server.message.ChatMessageSystem;
-import top.cocoawork.chat.server.protocol.DefaultLengthTransferPacket;
-import top.cocoawork.chat.server.protocol.LengthTransfer;
+import top.cocoaork.chat.client.message.ChatMessageSystem;
+import top.cocoaork.chat.client.protocol.DefaultLengthTransferPacket;
+import top.cocoaork.chat.client.protocol.LengthTransfer;
+
 
 import java.net.SocketAddress;
 
@@ -26,7 +27,6 @@ public class MyServerMessageHandler extends SimpleChannelInboundHandler<LengthTr
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LengthTransfer msg) throws Exception {
 
-        logger.debug("数据回写：" + msg.toJsonString());
         //数据回写
         channels.writeAndFlush(msg);
 

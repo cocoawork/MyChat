@@ -1,14 +1,15 @@
-package top.cocoawork.chat.server.handler;
+package top.cocoaork.chat.client.handler;
 
 import com.alibaba.fastjson.JSONObject;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
 import io.netty.util.CharsetUtil;
-import top.cocoawork.chat.server.message.ChatMessage;
-import top.cocoawork.chat.server.message.ChatMessageSystem;
-import top.cocoawork.chat.server.message.ChatMessageText;
-import top.cocoawork.chat.server.protocol.DefaultLengthTransferPacket;
+import top.cocoaork.chat.client.message.ChatMessage;
+import top.cocoaork.chat.client.message.ChatMessageSystem;
+import top.cocoaork.chat.client.message.ChatMessageText;
+import top.cocoaork.chat.client.protocol.DefaultLengthTransferPacket;
+
 
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class MyByteToMessageDecoder extends ByteToMessageDecoder {
         //json解析
         JSONObject jsonObject = JSONObject.parseObject(json);
         long time = jsonObject.getLong("timestamp");
-        byte type = jsonObject.getByteValue("type");
+        Byte type = jsonObject.getByteValue("type");
         String version = jsonObject.getString("version");
 
         JSONObject jsonDataObject = jsonObject.getJSONObject("data");
@@ -68,11 +69,9 @@ public class MyByteToMessageDecoder extends ByteToMessageDecoder {
             }
         }
 
+
         DefaultLengthTransferPacket<ChatMessage> transferPacket = new DefaultLengthTransferPacket<>(type, message);
 
-//        aPackage.setTimestamp(time);
-//        aPackage.setType(type);
-//        aPackage.setVersion(version+"");
         out.add(transferPacket);
 
     }

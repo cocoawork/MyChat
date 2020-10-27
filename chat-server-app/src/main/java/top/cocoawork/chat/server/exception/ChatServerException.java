@@ -3,6 +3,7 @@ package top.cocoawork.chat.server.exception;
 import top.cocoawork.chat.common.exception.MyChatException;
 
 public class ChatServerException extends MyChatException {
+
     public ChatServerException() {
     }
 

@@ -1,7 +1,7 @@
-package top.cocoawork.chat.server.message;
+package top.cocoaork.chat.client.message;
 
 import lombok.Data;
-import top.cocoawork.chat.server.interfaces.JsonSerializable;
+import top.cocoaork.chat.client.interfaces.JsonSerializable;
 
 @Data
 public abstract class ChatMessage implements JsonSerializable {
