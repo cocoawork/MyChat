@@ -27,24 +27,24 @@ public class MyClientMessageHandler extends SimpleChannelInboundHandler<LengthTr
         super.channelActive(ctx);
         channel = ctx.channel();
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-                    if (scanner.hasNextLine()){
-                        String line = scanner.nextLine();
-                        ChatMessageText message = new ChatMessageText();
-                        message.setContent(line.getBytes());
-                        sendMessage(message);
-                    }
-                    try {
-                        Thread.sleep(200);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }).start();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                while (true) {
+//                    if (scanner.hasNextLine()){
+//                        String line = scanner.nextLine();
+//                        ChatMessageText message = new ChatMessageText();
+//                        message.setContent(line.getBytes());
+//                        sendMessage(message);
+//                    }
+//                    try {
+//                        Thread.sleep(200);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        }).start();
 
 
 

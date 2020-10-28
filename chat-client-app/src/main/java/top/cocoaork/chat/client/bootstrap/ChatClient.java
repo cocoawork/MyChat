@@ -12,6 +12,7 @@ import io.netty.util.concurrent.GenericFutureListener;
 import top.cocoaork.chat.client.handler.MyByteToMessageDecoder;
 import top.cocoaork.chat.client.handler.MyClientMessageHandler;
 import top.cocoaork.chat.client.handler.MyMessageToByteEncoder;
+import top.cocoaork.chat.client.message.ChatMessage;
 
 
 import java.util.concurrent.TimeUnit;
@@ -20,6 +21,8 @@ public class ChatClient {
 
     private String host;
     private Integer port;
+
+    private MyClientMessageHandler messageHandler = new MyClientMessageHandler();
 
     private Bootstrap bootstrap;
 
@@ -49,7 +52,7 @@ public class ChatClient {
                         //处理入站消息的处理器
                         pipeline.addLast(new MyByteToMessageDecoder());
                         //业务处理器
-                        pipeline.addLast(new MyClientMessageHandler());
+                        pipeline.addLast(messageHandler);
 
                     }
                 });
@@ -71,8 +74,9 @@ public class ChatClient {
         bootstrap.group().shutdownGracefully();
     }
 
-    public static void main(String[] args) throws InterruptedException {
-        new ChatClient("127.0.0.1", 8888).run();
+
+    public void sendMessage(ChatMessage message) {
+        messageHandler.sendMessage(message);
     }
 
 

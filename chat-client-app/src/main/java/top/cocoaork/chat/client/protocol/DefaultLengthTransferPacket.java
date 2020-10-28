@@ -2,11 +2,14 @@ package top.cocoaork.chat.client.protocol;
 
 
 import com.alibaba.fastjson.annotation.JSONField;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import top.cocoaork.chat.client.interfaces.JsonSerializable;
 
 import java.nio.charset.StandardCharsets;
 
+@Setter
 @Getter
 public class DefaultLengthTransferPacket<T> implements LengthTransfer {
 

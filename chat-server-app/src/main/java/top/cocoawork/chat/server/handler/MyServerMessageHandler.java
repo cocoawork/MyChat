@@ -9,7 +9,7 @@ import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.util.concurrent.DefaultEventExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import top.cocoawork.chat.server.message.ChatMessageSystem;
+import top.cocoawork.chat.server.message.ChatMessageText;
 import top.cocoawork.chat.server.protocol.DefaultLengthTransferPacket;
 import top.cocoawork.chat.server.protocol.LengthTransfer;
 
@@ -44,8 +44,10 @@ public class MyServerMessageHandler extends SimpleChannelInboundHandler<LengthTr
 
         logger.debug(tip);
 
-        ChatMessageSystem message = new ChatMessageSystem();
-
+        ChatMessageText message = new ChatMessageText();
+        message.setContent(tip);
+        message.setMediaType(0);
+        message.setMsgType(-1);
         LengthTransfer transfer = new DefaultLengthTransferPacket(DefaultLengthTransferPacket.PACKET_TYPE_DATA, message);
 
         channels.writeAndFlush(transfer);

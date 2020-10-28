@@ -6,7 +6,6 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
 import io.netty.util.CharsetUtil;
 import top.cocoawork.chat.server.message.ChatMessage;
-import top.cocoawork.chat.server.message.ChatMessageSystem;
 import top.cocoawork.chat.server.message.ChatMessageText;
 import top.cocoawork.chat.server.protocol.DefaultLengthTransferPacket;
 
@@ -54,26 +53,20 @@ public class MyByteToMessageDecoder extends ByteToMessageDecoder {
 //            Long fromUid = jsonDataObject.getLong("fromUid");
 //            Long toUid = jsonDataObject.getLong("toUid");
 //            Integer recType = jsonDataObject.getInteger("recType");
-            Integer msgType = jsonDataObject.getInteger("msgType");
-            if (msgType == 1) {
+//            Integer msgType = jsonDataObject.getInteger("msgType");
+            Integer mediaType = jsonDataObject.getInteger("mediaType");
+
+            if (mediaType == 0) {
                 //文本消息
                 ChatMessageText messageText = jsonDataObject.toJavaObject(ChatMessageText.class);
-
                 message = messageText;
-            }
-            if (msgType == 0) {
-                //系统消息
-                ChatMessageSystem messageSystem = jsonDataObject.toJavaObject(ChatMessageSystem.class);
-                message = messageSystem;
             }
         }
 
-        DefaultLengthTransferPacket<ChatMessage> transferPacket = new DefaultLengthTransferPacket<>(type, message);
-
-//        aPackage.setTimestamp(time);
-//        aPackage.setType(type);
-//        aPackage.setVersion(version+"");
-        out.add(transferPacket);
+        DefaultLengthTransferPacket<ChatMessage> packet = new DefaultLengthTransferPacket<>(type, message);
+        packet.setTimestamp(time);
+        packet.setVersion(version);
+        out.add(packet);
 
     }
 
