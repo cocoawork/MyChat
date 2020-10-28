@@ -9,6 +9,7 @@ import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.util.concurrent.DefaultEventExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import top.cocoawork.chat.server.message.ChatMessage;
 import top.cocoawork.chat.server.message.ChatMessageText;
 import top.cocoawork.chat.server.protocol.DefaultLengthTransferPacket;
 import top.cocoawork.chat.server.protocol.LengthTransfer;
@@ -23,11 +24,38 @@ public class MyServerMessageHandler extends SimpleChannelInboundHandler<LengthTr
 
     private static ChannelGroup channels;
 
+
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LengthTransfer msg) throws Exception {
 
         logger.debug("数据回写：" + msg.toJsonString());
-        //数据回写
+
+        //数据回写、数据转发
+        if (msg instanceof DefaultLengthTransferPacket) {
+            DefaultLengthTransferPacket packet = (DefaultLengthTransferPacket) msg;
+            Object data = packet.getData();
+            if (data instanceof ChatMessage) {
+                ChatMessage message = (ChatMessage) data;
+                Integer msgType = message.getMsgType();
+
+                //消息接收方为空，忽略当前消息
+                if (null == message.getToUid()) {
+                    return;
+                }
+
+                if (msgType == 0) {
+                    //单聊
+                    //TODO: 查询toUid对应的用于连接ip，根据ip转发消息
+
+
+                }else if (msgType == 1) {
+                    //群聊
+                    //TODO: 根据toUid查询群组成员uid，根据成员uid查询成员登录ip，依次转发消息
+
+                }
+
+            }
+        }
         channels.writeAndFlush(msg);
 
     }
@@ -52,8 +80,21 @@ public class MyServerMessageHandler extends SimpleChannelInboundHandler<LengthTr
 
         channels.writeAndFlush(transfer);
         channels.add(ctx.channel());
+
+        int size = channels.size();
+        logger.debug("新设备连接，channels中连接数量：" + size);
     }
 
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        int size = channels.size();
+        logger.debug("设备断开，channels中连接数量：" + size);
+    }
+
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        logger.error("连接发生异常 \n 连接：{} \n原因：{}", ctx.channel(), cause);
+    }
 
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
