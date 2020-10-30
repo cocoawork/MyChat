@@ -42,7 +42,13 @@ public class ChatClientApplication implements ApplicationListener<ApplicationRea
                                 messageText.setContent(line);
                                 messageText.setMediaType(0);
                                 messageText.setMsgType(1);
-                                chatClient.sendMessage(messageText);
+
+                                for (int i = 0; i < 10; i++) {
+                                    new Thread(() -> {
+                                        chatClient.sendMessage(messageText);
+                                    }).start();
+                                }
+
                             }
                         }).start();
 

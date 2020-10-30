@@ -10,10 +10,13 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import io.netty.handler.timeout.IdleStateHandler;
 import top.cocoawork.chat.server.exception.ChatServerException;
 import top.cocoawork.chat.server.handler.MyByteToMessageDecoder;
 import top.cocoawork.chat.server.handler.MyMessageToByteEncoder;
 import top.cocoawork.chat.server.handler.MyServerMessageHandler;
+
+import java.util.concurrent.TimeUnit;
 
 public class ChatServer {
 

@@ -55,7 +55,7 @@
     </root>
 
     <!-- cn.fg.api包下的日志，使用error级别进行输出， addtivity="false"后，root就不会再输出，不然就会打印两次，因为logger是继承root的 -->
-    <logger name="cn.fg.api" level="ERROR" addtivity="false">
+    <logger name="top.cocoawork.chat.*" level="ERROR" addtivity="false">
         <appender-ref ref="FILE"></appender-ref>
     </logger>
 

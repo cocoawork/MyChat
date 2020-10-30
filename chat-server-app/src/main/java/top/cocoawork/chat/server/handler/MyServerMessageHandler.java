@@ -28,7 +28,7 @@ public class MyServerMessageHandler extends SimpleChannelInboundHandler<LengthTr
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LengthTransfer msg) throws Exception {
 
-        logger.debug("数据回写：" + msg.toJsonString());
+        logger.info("接收到消息：{}", msg.toJsonString());
 
         //数据回写、数据转发
         if (msg instanceof DefaultLengthTransferPacket) {
@@ -45,7 +45,7 @@ public class MyServerMessageHandler extends SimpleChannelInboundHandler<LengthTr
 
                 if (msgType == 0) {
                     //单聊
-                    //TODO: 查询toUid对应的用于连接ip，根据ip转发消息
+                    //TODO: 查询toUid对应的用户连接ip，根据ip转发消息
 
 
                 }else if (msgType == 1) {
@@ -65,12 +65,11 @@ public class MyServerMessageHandler extends SimpleChannelInboundHandler<LengthTr
         if ( null == channels) {
             channels = new DefaultChannelGroup(new DefaultEventExecutor());
         }
+
         SocketAddress clientAddress = ctx.channel().remoteAddress();
 
         //提示群组中所有客户端 有新的成员上线了
         String tip =  "[" + clientAddress + "]上线了";
-
-        logger.debug(tip);
 
         ChatMessageText message = new ChatMessageText();
         message.setContent(tip);
@@ -104,6 +103,7 @@ public class MyServerMessageHandler extends SimpleChannelInboundHandler<LengthTr
                 all_idle_times++;
             }
 
+//            logger.debug("发生事件：{}", event);
 //            //接收到超过三次，断开连接
 //            if (all_idle_times >= 3) {
 //                ctx.channel().close();
