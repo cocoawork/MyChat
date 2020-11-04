@@ -4,7 +4,7 @@
 ### 使用到/将会使用到
 * SSM
 * SpringBoot
-* Mysql
+* MySQL
 * Netty
 * Redis
 
