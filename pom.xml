@@ -17,11 +17,8 @@
 
 
     <modules>
-        <module>chat-common</module>
-        <module>chat-service-api</module>
-        <module>chat-service</module>
-        <module>chat-server-app</module>
-        <module>chat-dao</module>
+        <module>chat-server</module>
+        <module>chat-service-web</module>
     </modules>
 
     <properties>
