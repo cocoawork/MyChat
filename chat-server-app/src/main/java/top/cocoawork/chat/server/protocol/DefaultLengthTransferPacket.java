@@ -31,7 +31,7 @@ public class DefaultLengthTransferPacket<T> implements LengthTransfer {
     private T data;
 
     private DefaultLengthTransferPacket() {
-        throw new AssertionError("sorry, you can not call this private constructor!");
+        throw new UnsupportedOperationException("使用有参构造方法");
     }
 
     public DefaultLengthTransferPacket(byte type) {
