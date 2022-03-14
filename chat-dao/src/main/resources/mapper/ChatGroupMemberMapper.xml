@@ -2,10 +2,10 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="top.cocoawork.chat.dao.mapper.ChatGroupMemberMapper">
+<mapper namespace="top.cocoawork.wechat.dao.mapper.ChatGroupMemberMapper">
 
 
-    <update id="update" parameterType="top.cocoawork.chat.dao.entity.ChatGroupMember">
+    <update id="update" parameterType="top.cocoawork.wechat.dao.entity.ChatGroupMember">
         update t_group_member set update_at = now(),
         <if test="#{member.userNick} != null">
              user_nick = #{member.userNick}
@@ -13,7 +13,7 @@
         where gid = #{member.gid} and uid = #{member.uid} and del = 0
     </update>
 
-    <select id="getMembersById" resultType="top.cocoawork.chat.dao.entity.ChatGroupMember">
+    <select id="getMembersById" resultType="top.cocoawork.wechat.dao.entity.ChatGroupMember">
         select m.uid, m.user_nick, u.*
         from t_group_member m left join t_user u
         on m.uid = u.id

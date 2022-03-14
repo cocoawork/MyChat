@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="top.cocoawork.chat.dao.mapper.UserFriendMapper">
+<mapper namespace="top.cocoawork.wechat.dao.mapper.UserFriendMapper">
 
-    <select id="getFriendsById" resultType="top.cocoawork.chat.dao.entity.User">
+    <select id="getFriendsById" resultType="top.cocoawork.wechat.dao.entity.User">
         select u.* from t_friend f left join t_user u on u.id = f.fid
         where f.fid = #{uid} and f.del = 0 order by f.create_at desc
     </select>

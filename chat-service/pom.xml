@@ -3,8 +3,8 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>MyChat</artifactId>
-        <groupId>top.cocoawork.chat</groupId>
+        <artifactId>wechat</artifactId>
+        <groupId>top.cocoawork</groupId>
         <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -16,30 +16,23 @@
 
 
         <dependency>
-            <groupId>top.cocoawork.chat</groupId>
+            <groupId>top.cocoawork</groupId>
             <artifactId>chat-service-api</artifactId>
             <version>${chat-service-api-version}</version>
             <scope>compile</scope>
         </dependency>
 
         <dependency>
-            <groupId>top.cocoawork.chat</groupId>
+            <groupId>top.cocoawork</groupId>
             <artifactId>chat-dao</artifactId>
             <version>${chat-dao-version}</version>
         </dependency>
 
         <dependency>
-            <groupId>top.cocoawork.chat</groupId>
+            <groupId>top.cocoawork</groupId>
             <artifactId>chat-common</artifactId>
             <version>${chat-common-version}</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.apache.dubbo</groupId>
-            <artifactId>dubbo-spring-boot-starter</artifactId>
-            <version>2.7.8</version>
-        </dependency>
-
 
         <dependency>
             <groupId>org.projectlombok</groupId>

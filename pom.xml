@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>top.cocoawork.chat</groupId>
-    <artifactId>MyChat</artifactId>
+    <groupId>top.cocoawork</groupId>
+    <artifactId>wechat</artifactId>
     <packaging>pom</packaging>
     <version>1.0</version>
 
@@ -20,9 +20,7 @@
         <module>chat-common</module>
         <module>chat-service-api</module>
         <module>chat-service</module>
-        <module>chat-api</module>
         <module>chat-server-app</module>
-        <module>chat-client-app</module>
         <module>chat-dao</module>
     </modules>
 
@@ -30,7 +28,6 @@
 
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-
         <chat-common-version>1.0</chat-common-version>
         <chat-service-version>1.0</chat-service-version>
         <chat-service-api-version>1.0</chat-service-api-version>
@@ -45,8 +42,6 @@
         <mysql-version>8.0.20</mysql-version>
         <fast-json-version>1.2.74</fast-json-version>
         <dozer-version>6.5.0</dozer-version>
-        <dubbo-starter-version>2.0.0</dubbo-starter-version>
-
 
     </properties>
 
