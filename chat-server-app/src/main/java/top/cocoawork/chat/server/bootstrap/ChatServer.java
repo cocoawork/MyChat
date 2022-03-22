@@ -62,8 +62,7 @@ public class ChatServer {
 
 
     public void run() throws InterruptedException {
-        bootstrap.bind(port).sync()
-                .channel().closeFuture().sync();
+        bootstrap.bind(port).sync().channel().closeFuture().sync();
     }
 
 }

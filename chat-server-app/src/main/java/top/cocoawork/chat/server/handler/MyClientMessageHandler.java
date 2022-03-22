@@ -1,12 +1,12 @@
-package top.cocoaork.chat.client.handler;
+package top.cocoawork.chat.server.handler;
 
 import io.netty.channel.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import top.cocoaork.chat.client.message.ChatMessage;
-import top.cocoaork.chat.client.message.ChatMessageText;
-import top.cocoaork.chat.client.protocol.DefaultLengthTransferPacket;
-import top.cocoaork.chat.client.protocol.LengthTransfer;
+import top.cocoawork.chat.server.message.ChatMessage;
+import top.cocoawork.chat.server.protocol.DefaultLengthTransferPacket;
+import top.cocoawork.chat.server.protocol.LengthTransfer;
+
 
 import java.time.Instant;
 import java.time.LocalDateTime;

@@ -1,4 +1,4 @@
-package top.cocoaork.chat.client.bootstrap;
+package top.cocoawork.chat.server.bootstrap;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
@@ -9,13 +9,12 @@ import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.timeout.IdleStateHandler;
 import io.netty.util.concurrent.GenericFutureListener;
-import top.cocoaork.chat.client.handler.MyByteToMessageDecoder;
-import top.cocoaork.chat.client.handler.MyClientMessageHandler;
-import top.cocoaork.chat.client.handler.MyMessageToByteEncoder;
-import top.cocoaork.chat.client.message.ChatMessage;
+import top.cocoawork.chat.server.handler.MyByteToMessageDecoder;
+import top.cocoawork.chat.server.handler.MyClientMessageHandler;
+import top.cocoawork.chat.server.handler.MyMessageToByteEncoder;
+import top.cocoawork.chat.server.message.ChatMessage;
 
 
-import java.util.concurrent.TimeUnit;
 
 public class ChatClient {
 
@@ -65,8 +64,7 @@ public class ChatClient {
     }
 
     public void runWithListener(GenericFutureListener listener) throws InterruptedException {
-        bootstrap.connect(host,port).addListener(listener).sync()
-                .channel().closeFuture().sync();
+        bootstrap.connect(host,port).addListener(listener);
     }
 
 

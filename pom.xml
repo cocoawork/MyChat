@@ -20,7 +20,6 @@
         <module>chat-common</module>
         <module>chat-service-api</module>
         <module>chat-service</module>
-        <module>chat-api</module>
         <module>chat-server-app</module>
         <module>chat-client-app</module>
         <module>chat-dao</module>
